@@ -1,0 +1,23 @@
+version: '3.0'
+services:
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+#        build:
+#            context: .
+#            dockerfile: Dockerfile.mysql
+        hostname: mysql
+        privileged: true
+        restart: always
+        ports:
+            - 3306:3306/tcp
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+            - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+        logging:
+            driver: json-file
+            options:
+                max-file: '3'
+                max-size: 100m
